@@ -1,1 +1,18 @@
-﻿._*
+._*
+
+# IDE and local environments
+.idea/
+.venv/
+__pycache__/
+
+# Local tools
+gh.exe
+tools/python311/
+
+# Raw survey data and reference bundles
+TCS2011/
+TCS 2022 Database 2/
+
+# Local scratch / bootstrap files
+main.py
+TRAIL_project_code_architecture.md
