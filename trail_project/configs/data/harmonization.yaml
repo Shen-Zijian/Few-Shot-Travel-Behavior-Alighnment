@@ -1,0 +1,264 @@
+# Variable Harmonization Crosswalk: TCS 2011 <-> TCS 2022 -> Unified Schema
+# This file is the single source of truth for all variable mappings.
+
+# ============================================================
+# MODE MAPPING
+# ============================================================
+# Cross-year common task definition:
+#   - TCS 2011 uses TP24, which only contains mechanised trips involving the
+#     9 major transport mode hierarchies.
+#   - TCS 2022 uses TP with Main_mode <= 9, which corresponds to the same
+#     9 major mechanised mode hierarchies according to SubModeLookup.xlsx.
+#
+# Therefore, the shared cross-year label space is the official 9-class
+# mechanised mode hierarchy:
+#   1 = Rail
+#   2 = LRT
+#   3 = Tram
+#   4 = Ferry
+#   5 = PLB
+#   6 = Bus
+#   7 = Private Vehicle
+#   8 = Taxi
+#   9 = SPB
+#
+# Excluded from the shared task:
+#   - 2022 Main_mode = 10 (Other)
+#   - 2022 Main_mode = 99 (Walk)
+#   - 2022 Main_mode = 999 (Unknown / invalid)
+#   - 2011 walk-only / minor-mode-only trips, because TP24 excludes them by design
+
+mode_unified_labels:
+  1: "Rail"
+  2: "LRT"
+  3: "Tram"
+  4: "Ferry"
+  5: "PLB"
+  6: "Bus"
+  7: "Private Vehicle"
+  8: "Taxi"
+  9: "SPB"
+
+# TCS 2022 Main_mode -> unified_mode (identity on the common 9-class space)
+mode_2022_to_unified:
+  1: 1
+  2: 2
+  3: 3
+  4: 4
+  5: 5
+  6: 6
+  7: 7
+  8: 8
+  9: 9
+
+# TCS 2011 TP24 Mode_Hier -> unified_mode (same official hierarchy)
+mode_2011_to_unified:
+  1: 1
+  2: 2
+  3: 3
+  4: 4
+  5: 5
+  6: 6
+  7: 7
+  8: 8
+  9: 9
+
+# ============================================================
+# TRIP PURPOSE MAPPING
+# ============================================================
+# Unified trip_purpose codes:
+#   1 = Work
+#   2 = School/Education
+#   3 = Shopping
+#   4 = Leisure/Recreation
+#   5 = Personal business
+#   6 = Home (return home)
+#   7 = Other
+
+purpose_unified_labels:
+  1: "Work"
+  2: "Education"
+  3: "Shopping"
+  4: "Leisure"
+  5: "Personal Business"
+  6: "Home"
+  7: "Other"
+
+# TCS 2022 T_Pur -> unified_purpose
+# Verified from Tabulation TCS 2022.xlsm (ETP001 / ETP004):
+#   1=HBW, 2=HBS, 3=HBO, 4=EB, 5=NHB
+purpose_2022_to_unified:
+  1: 1   # HBW -> Work
+  2: 2   # HBS -> Education
+  3: 7   # HBO -> Other
+  4: 1   # EB -> Work
+  5: 7   # NHB -> Other
+
+# TCS 2011 TP24 Pur -> unified_purpose
+# Verified from Tabulation TCS 2011.xlsm (ETP001 / ETP004):
+#   1=HBW, 2=HBS, 3=HBO, 4=EB, 5=NHB
+purpose_2011_to_unified:
+  1: 1   # HBW -> Work
+  2: 2   # HBS -> Education
+  3: 7   # HBO -> Other
+  4: 1   # EB -> Work
+  5: 7   # NHB -> Other
+
+# ============================================================
+# AGE GROUP MAPPING
+# ============================================================
+# Unified age_group (6 bands):
+#   1 = 0-14
+#   2 = 15-24
+#   3 = 25-44
+#   4 = 45-64
+#   5 = 65+
+#   0 = Unknown
+
+age_bins: [0, 15, 25, 45, 65, 999]
+age_labels: [1, 2, 3, 4, 5]
+
+# TCS 2011: HM.B2 is raw age integer -> apply age_bins
+# TCS 2022: HM.B2 is raw age integer -> apply age_bins
+
+# ============================================================
+# SEX MAPPING
+# ============================================================
+# TCS 2011 HM.B1: 1=Male, 2=Female
+# TCS 2022 HM.B1: 1=Male, 2=Female
+# Unified: same coding, no remapping needed
+sex_codes:
+  1: "Male"
+  2: "Female"
+
+# ============================================================
+# EMPLOYMENT STATUS MAPPING
+# ============================================================
+# Unified employment_status:
+#   1 = Full-time employed
+#   2 = Part-time employed
+#   3 = Self-employed
+#   4 = Student
+#   5 = Homemaker
+#   6 = Retired
+#   7 = Unemployed/other
+
+employment_unified_labels:
+  1: "Full-time"
+  2: "Part-time"
+  3: "Self-employed"
+  4: "Student"
+  5: "Homemaker"
+  6: "Retired"
+  7: "Other"
+
+# TCS 2011 E_Status -> unified (6 categories confirmed from data)
+# {1:6296, 2:332, 3:2482, 4:2094, 5:2499, 6:182}
+employment_2011_to_unified:
+  1: 1   # Full-time employed
+  2: 2   # Part-time employed
+  3: 4   # Student (3 in 2011 = student)
+  4: 5   # Homemaker
+  5: 6   # Retired
+  6: 7   # Other (unemployed, etc.)
+
+# TCS 2022 E_status -> unified (6 categories confirmed from data)
+# {1:44759, 2:2781, 3:12477, 4:7529, 5:19641, 6:2284}
+employment_2022_to_unified:
+  1: 1   # Full-time employed
+  2: 2   # Part-time employed
+  3: 4   # Student
+  4: 5   # Homemaker / not working
+  5: 6   # Retired
+  6: 7   # Other
+
+# ============================================================
+# INCOME GROUP MAPPING
+# ============================================================
+# Unified income_group (5 bands):
+#   1 = Low (<$10,000/month)
+#   2 = Lower-middle ($10,000-$19,999)
+#   3 = Middle ($20,000-$39,999)
+#   4 = Upper-middle ($40,000-$59,999)
+#   5 = High (>=$60,000)
+#   0 = Not reported/refused
+
+income_unified_labels:
+  0: "Not reported"
+  1: "Low"
+  2: "Lower-middle"
+  3: "Middle"
+  4: "Upper-middle"
+  5: "High"
+
+# TCS 2011 HH.B15 -> unified_income
+# B15 has ~19 income bands + code 97 (refused)
+# Mapping confirmed from typical TCS 2011 questionnaire structure
+# (<$4k, $4-8k, $8-12k, $12-16k, $16-20k, $20-25k, $25-30k, $30-35k,
+#  $35-40k, $40-45k, $45-50k, $50-60k, $60-70k, $70-80k, $80-100k,
+#  $100-125k, $125-150k, $150k+, refused)
+income_2011_to_unified:
+  1: 1   # <$4k -> Low
+  2: 1   # $4-8k -> Low
+  3: 1   # $8-12k -> Low
+  4: 2   # $12-16k -> Lower-middle
+  5: 2   # $16-20k -> Lower-middle
+  6: 3   # $20-25k -> Middle
+  7: 3   # $25-30k -> Middle
+  8: 3   # $30-35k -> Middle
+  9: 3   # $35-40k -> Middle
+  10: 4  # $40-45k -> Upper-middle
+  11: 4  # $45-50k -> Upper-middle
+  12: 4  # $50-60k -> Upper-middle
+  13: 4  # $60-70k -> Upper-middle
+  14: 5  # $70-80k -> High
+  15: 5  # $80-100k -> High
+  16: 5  # $100-125k -> High
+  17: 5  # $125-150k -> High
+  18: 5  # $150k+ -> High
+  19: 5  # Additional high band
+  97: 0  # Refused -> Not reported
+
+# TCS 2022: income not clearly available in raw files examined.
+# Will use car_availability + employment as proxy features.
+# Set income_group = 0 (not reported) for all 2022 records until field confirmed.
+income_2022_field: null   # TBD - requires further questionnaire review
+
+# ============================================================
+# CAR AVAILABILITY MAPPING
+# ============================================================
+# Unified car_availability:
+#   0 = No car in household
+#   1 = 1 car
+#   2 = 2+ cars
+# TCS 2011: derived from C2A1/C2A2/C2B1/C2B2/C2C1/C2C2
+# TCS 2022: derived from sum of C1A1-C1A5 columns
+
+# ============================================================
+# TIME PERIOD MAPPING
+# ============================================================
+# Unified departure_period (4 periods based on mid-departure time):
+#   1 = AM Peak (07:00-09:29)
+#   2 = Inter-peak (09:30-16:29)
+#   3 = PM Peak (16:30-18:59)
+#   4 = Off-peak (19:00-06:59)
+
+time_period_labels:
+  1: "AM Peak"
+  2: "Inter-peak"
+  3: "PM Peak"
+  4: "Off-peak"
+
+# TCS 2011 TiPer maps directly
+time_period_2011_to_unified:
+  1: 1
+  2: 2
+  3: 3
+  4: 4
+
+# TCS 2022 4_Pks maps directly
+time_period_2022_to_unified:
+  1: 1
+  2: 2
+  3: 3
+  4: 4

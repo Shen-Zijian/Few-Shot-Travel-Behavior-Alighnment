@@ -1,0 +1,10 @@
+unified_mode,tcs2011_field,tcs2011_code,tcs2022_field,tcs2022_code,label
+1,Mode_Hier,1,Main_mode,1,Rail
+2,Mode_Hier,2,Main_mode,2,LRT
+3,Mode_Hier,3,Main_mode,3,Tram
+4,Mode_Hier,4,Main_mode,4,Ferry
+5,Mode_Hier,5,Main_mode,5,PLB
+6,Mode_Hier,6,Main_mode,6,Bus
+7,Mode_Hier,7,Main_mode,7,Private Vehicle
+8,Mode_Hier,8,Main_mode,8,Taxi
+9,Mode_Hier,9,Main_mode,9,SPB

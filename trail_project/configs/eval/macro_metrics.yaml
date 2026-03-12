@@ -1,0 +1,19 @@
+# Macro-level (population-level) evaluation metrics
+metrics:
+  - mode_share_mae        # mean absolute error of mode share
+  - mode_share_js         # Jensen-Shannon divergence of mode share distribution
+  - purpose_share_mae
+  - departure_period_mae
+
+# Mode share target labels
+mode_labels:
+  1: "MTR/Rail"
+  2: "Bus"
+  3: "Minibus"
+  4: "Taxi"
+  5: "Private Car"
+  6: "Walking"
+  7: "Other"
+
+# Whether to use trip weights for macro metrics
+use_trip_weights: true

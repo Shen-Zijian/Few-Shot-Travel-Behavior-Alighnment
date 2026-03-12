@@ -1,0 +1,13 @@
+# Micro-level evaluation metrics
+metrics:
+  - accuracy
+  - macro_f1
+  - weighted_f1
+  - nll                   # negative log-likelihood
+  - brier_score
+
+# Per-class breakdown
+per_class_metrics:
+  - precision
+  - recall
+  - f1

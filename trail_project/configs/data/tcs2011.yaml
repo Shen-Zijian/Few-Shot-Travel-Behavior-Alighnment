@@ -1,0 +1,55 @@
+# TCS 2011 raw data paths (relative to project root)
+raw_data:
+  access_db: "../TCS2011/TCS2011 Raw Data & Operational Mannual/TCS2011 Database/TCS2011 database.accdb"
+
+# Table names in the Access database
+tables:
+  household: "HH"
+  member: "HM"
+  trip: "TP24"
+  tpusb_lookup: "11TPUSB"
+
+# Household-level columns
+hh_columns:
+  household_id: "Q_NO"
+  hh_size: "A3"
+  hh_income: "B15"
+  hh_weight: "WT_HH"
+  tpusb: "HH_TPUSB"
+  # Car ownership is derived from the six household vehicle count fields
+  car_cols: ["C2A1", "C2A2", "C2B1", "C2B2", "C2C1", "C2C2"]
+
+# Household-member-level columns
+hm_columns:
+  household_id: "Q_NO"
+  member_id: "MEM"
+  sex: "B1"
+  age: "B2"
+  employment: "E_Status"
+  member_weight: "WT_MEM"
+  urban_rural: "UR_MR"
+
+# Trip-level columns from TP24
+tp_columns:
+  household_id: "Q_NO"
+  member_id: "MEM"
+  trip_no: "Trip_no"
+  trip_purpose: "Pur"
+  main_mode: "Mode_Hier"
+  depart_time: "Deptm"
+  arrive_time: "Arrtm"
+  journey_time: "Joutm"
+  origin_tpusb: "D5"
+  dest_tpusb: "D6"
+  # Joined 26-district origin/destination fields created by loader.py
+  origin_zone: "origin_db26"
+  dest_zone: "dest_db26"
+  time_period: "TiPer"
+  trip_weight: "WT_TRIP"
+
+# TPUSB lookup columns for mapping to the 26-board-district system
+lookup_columns:
+  tpusb: "11TPUSB"
+  district26: "DB26"
+
+survey_year: 2011

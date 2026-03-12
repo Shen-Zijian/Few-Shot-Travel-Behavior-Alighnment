@@ -1,0 +1,18 @@
+# Prototype builder configuration
+n_clusters: 20            # number of behavior prototypes
+clustering_method: "kmeans"
+random_state: 42
+n_init: 20
+
+# Features used for clustering
+cluster_feature_cols:
+  - "age_group"
+  - "sex"
+  - "employment_status"
+  - "income_group"
+  - "car_availability"
+  - "trip_purpose"
+  - "departure_period"
+
+# Prototype cache path (relative to project root)
+cache_path: "data/processed/prototype_cache/prototypes.pkl"

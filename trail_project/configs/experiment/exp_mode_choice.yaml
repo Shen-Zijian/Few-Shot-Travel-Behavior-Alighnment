@@ -1,0 +1,39 @@
+# Experiment: Main Mode Choice Prediction (MVP-1)
+task: "mode_choice"
+target_col: "main_mode"
+
+# Data splits
+survey_2011_split: "train"           # full 2011 as historical prior
+survey_2022_test_ratio: 0.2          # 20% of 2022 as held-out test
+survey_2022_pool_ratio: 0.8          # remaining 80% as pool (few-shot drawn from here)
+
+# Few-shot ratios to evaluate (of pool size)
+fewshot_ratios: [0.01, 0.05, 0.10]
+
+# Random seeds for repeated sampling
+random_seeds: [42, 123, 456]
+
+# Baselines to run
+baselines:
+  - mnl
+  - xgboost
+  - prompt_only
+
+# TRAIL components
+trail:
+  use_prototypes: true
+  use_retrieval: true
+  use_calibration: false   # MVP-1: no active loop yet
+
+# Evaluation groups
+eval_subgroups:
+  - "age_group"
+  - "sex"
+  - "employment_status"
+  - "income_group"
+  - "car_availability"
+
+# Output paths
+output_dir: "outputs"
+predictions_dir: "outputs/predictions"
+metrics_dir: "outputs/metrics"

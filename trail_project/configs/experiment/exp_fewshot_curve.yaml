@@ -1,0 +1,18 @@
+# Experiment: Few-shot Adaptation Curve
+task: "mode_choice"
+target_col: "main_mode"
+
+# Fine-grained few-shot sizes for sample efficiency curve
+fewshot_ratios: [0.01, 0.05, 0.10]
+
+# Models to compare on the curve
+models:
+  - mnl
+  - xgboost
+  - prompt_only
+  - trail
+
+random_seeds: [42, 123, 456]
+
+output_dir: "outputs"
+figures_dir: "outputs/figures"

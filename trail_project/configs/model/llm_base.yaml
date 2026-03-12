@@ -1,0 +1,14 @@
+# LLM configuration
+provider: "openai"
+model: "gpt-5.2"         # Official model name per OpenAI API docs
+temperature: 0.0          # Deterministic output for reproducibility
+max_tokens: 512
+timeout: 60               # seconds per request
+max_retries: 3
+retry_delay: 5            # seconds between retries
+
+# Output format
+output_format: "json_object"   # Force JSON mode
+
+# Token budget (for cost tracking)
+log_tokens: true

@@ -1,0 +1,48 @@
+# TCS 2022 raw data paths (relative to project root)
+raw_data:
+  hh_file: "../TCS 2022 Database 2/TCS 2022 DATABASE(burn to CD)/HH.xlsx"
+  hm_file: "../TCS 2022 Database 2/TCS 2022 DATABASE(burn to CD)/HM.xlsx"
+  tp_file: "../TCS 2022 Database 2/TCS 2022 DATABASE(burn to CD)/TP.xlsx"
+  tp_full_file: "../TCS 2022 Database 2/TCS 2022 DATABASE(burn to CD)/TP_full.xlsx"
+  submode_lookup: "../TCS 2022 Database 2/TCS 2022 DATABASE(burn to CD)/SubModeLookup.xlsx"
+
+# Key column names
+hh_columns:
+  household_id: "Q_no"
+  hh_type: "HH_Type"
+  hh_weight: "WT_HH"
+  tpusb: "HH_TPUSB"
+  # A3 = household size (number of members)
+  hh_size: "A3"
+  # Car availability: derived from C1A1-C1A5 (number of private cars/vans by type)
+  # Sum > 0 => has car; sum > 1 => 2+ cars
+  car_cols: ["C1A1", "C1A2", "C1A3", "C1A4", "C1A5"]
+
+hm_columns:
+  household_id: "Q_no"
+  member_id: "Mem"
+  # A4 = relationship to HH head (1=head, 2=spouse, 3=child, etc.)
+  hh_relation: "A4"
+  # B1 = sex (1=Male, 2=Female), B2 = age in years
+  sex: "B1"
+  age: "B2"
+  employment: "E_status"
+  member_weight: "WT_MEM"
+  urban_rural: "UR_MR"
+
+tp_columns:
+  household_id: "Q_no"
+  member_id: "Mem"
+  trip_no: "Trip_no"
+  trip_purpose: "T_Pur"
+  main_mode: "Main_mode"
+  depart_time: "D7"
+  arrive_time: "D8"
+  journey_time: "Journey Time"
+  origin_zone: "O_26PDD"
+  dest_zone: "D_26PDD"
+  time_period: "4_Pks"
+  trip_weight: "WT_TRIP"
+  member_weight: "WT_MEM"
+
+survey_year: 2022

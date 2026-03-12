@@ -1,0 +1,29 @@
+# Environment / secrets
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Data (raw and processed - too large for git)
+data/raw/
+data/interim/
+data/processed/
+
+# Outputs (generated files)
+outputs/
+
+# Notebooks checkpoints
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/

@@ -1,0 +1,25 @@
+# Retrieval configuration
+method: "cosine"          # cosine similarity on normalized tabular features
+top_k: 8                  # number of examples to retrieve per query
+
+# Retrieval score weights
+lambda_similarity: 0.5    # sim(query, candidate)
+lambda_shift: 0.3         # temporal shift weight
+lambda_priority: 0.2      # calibration error priority
+
+# Memory bank settings
+use_historical_memory: true
+use_fewshot_memory: true
+use_error_memory: false   # MVP-1: not yet active
+
+# Feature columns used for retrieval similarity
+# Note: origin_zone_int / dest_zone_int derived from origin_zone / destination_zone at runtime
+retrieval_feature_cols:
+  - "car_availability"
+  - "age_group"
+  - "employment_status"
+  - "trip_purpose"
+  - "origin_zone_int"
+  - "dest_zone_int"
+  - "sex"
+  - "departure_period"
